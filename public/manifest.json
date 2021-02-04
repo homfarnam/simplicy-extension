@@ -1,25 +1,23 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+  "name": "Simplicy",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Simplicy",
+  "icons": {
+    "512": "./images/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "./images/logo.png",
+    "default_popup": "index.html"
+  },
+
+  "permissions": [
+    "contextMenus",
+    "management",
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000 ws://localhost:8000; style-src * 'unsafe-inline' 'self' blob:; img-src * 'self' data:;"
 }
