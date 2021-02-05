@@ -1,13 +1,6 @@
-import { useContext, useState } from "react"
-import { ethers } from "ethers"
 import styled from "styled-components"
 import { Button } from "../../components/Button/Button"
 import SmallLogo from "../../images/small-logo.png"
-
-const { isValidMnemonic } = ethers.utils
-
-const parseSeedPhrase = (seedPhrase: string) =>
-  (seedPhrase || "").trim().toLowerCase().match(/\w+/gu)?.join(" ") || ""
 
 const Top = styled.div`
   background: #213445;
@@ -34,71 +27,6 @@ const Subtitle = styled.p`
 interface ImportWalletProps {}
 
 export const ImportWallet: React.FC<ImportWalletProps> = () => {
-  const [seedPhrase, setSeedPhrase] = useState<string>("")
-  const [showSeedPhrase, setShowSeedPhrase] = useState<boolean>(false)
-  const [seedPhraseError, setSeedPhraseError] = useState<string>("")
-
-  const handleSeedPhraseChange = (seedPhrase: string) => {
-    let seedPhraseError = ""
-
-    if (seedPhrase) {
-      const parsedSeedPhrase = parseSeedPhrase(seedPhrase)
-      const wordCount = parsedSeedPhrase.split(/\s/u).length
-      if (wordCount % 3 !== 0 || wordCount > 24 || wordCount < 12) {
-        seedPhraseError = this.context.t("seedPhraseReq")
-      } else if (!isValidMnemonic(parsedSeedPhrase)) {
-        seedPhraseError = this.context.t("invalidSeedPhrase")
-      }
-    }
-
-    setSeedPhrase(seedPhrase)
-    setSeedPhraseError(seedPhraseError)
-  }
-
-  const handlePasswordChange = (password: any) => {
-    const { t } = this.context
-    const t = useContext(I18nContext)
-
-    this.setState((state) => {
-      const { confirmPassword } = state
-      let confirmPasswordError = ""
-      let passwordError = ""
-
-      if (password && password.length < 8) {
-        passwordError = t("passwordNotLongEnough")
-      }
-
-      if (confirmPassword && password !== confirmPassword) {
-        confirmPasswordError = t("passwordsDontMatch")
-      }
-
-      return {
-        password,
-        passwordError,
-        confirmPasswordError,
-      }
-    })
-  }
-
-  const handleConfirmPasswordChange = (confirmPassword: any) => {
-    // const { t } = this.context
-    const context = useContext()
-
-    this.setState((state) => {
-      const { password } = state
-      let confirmPasswordError = ""
-
-      if (password !== confirmPassword) {
-        confirmPasswordError = t("passwordsDontMatch")
-      }
-
-      return {
-        confirmPassword,
-        confirmPasswordError,
-      }
-    })
-  }
-
   return (
     <div>
       <Top>
@@ -123,8 +51,6 @@ export const ImportWallet: React.FC<ImportWalletProps> = () => {
                 placeholder="Paste seed phase from clipboard"
                 className="w-5/6 h-16 rounded-xl p-5 border-2 border-black text-black placeholder-gray-400"
                 type="password"
-                onChange={(e) => handleSeedPhraseChange(e.target.value)}
-                value={seedPhrase}
               />
             </div>
 
